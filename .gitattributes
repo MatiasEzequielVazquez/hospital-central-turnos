@@ -1,0 +1,4 @@
+# Normaliza finales de linea para que los tests de caracterizacion
+# den el mismo resultado en Windows, Linux y macOS
+* text=auto eol=lf
+*.png binary
