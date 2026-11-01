@@ -8,6 +8,7 @@ public class Main {
         Datos.cargar();
         Scanner sc = new Scanner(System.in);
         TurnoManager tm = new TurnoManager();
+        ReporteManager rm = new ReporteManager();
         boolean salir = false;
         while (!salir) {
             System.out.println();
@@ -15,6 +16,8 @@ public class Main {
             System.out.println("1) Registrar turno");
             System.out.println("2) Cancelar turno");
             System.out.println("3) Marcar turno como atendido");
+            System.out.println("4) Buscar turnos");
+            System.out.println("5) Reporte general");
             System.out.println("0) Salir");
             System.out.print("Opcion: ");
             if (!sc.hasNextLine()) {
@@ -52,6 +55,22 @@ public class Main {
                     } catch (NumberFormatException e) {
                         System.out.println("ERROR: id invalido");
                     }
+                    break;
+                case "4":
+                    System.out.print("Matricula (vacio = todas): ");
+                    String m = sc.nextLine().trim().toUpperCase();
+                    System.out.print("Estado PENDIENTE/ATENDIDO/CANCELADO (vacio = todos): ");
+                    String e = sc.nextLine().trim();
+                    System.out.print("Desde AAAA-MM-DD (vacio = sin limite): ");
+                    String d = sc.nextLine().trim();
+                    System.out.print("Hasta AAAA-MM-DD (vacio = sin limite): ");
+                    String h = sc.nextLine().trim();
+                    System.out.print("Solo urgentes (s/n): ");
+                    boolean su = sc.nextLine().trim().equalsIgnoreCase("s");
+                    rm.buscar(m, e, d, h, su);
+                    break;
+                case "5":
+                    rm.reporte();
                     break;
                 case "0":
                     salir = true;
