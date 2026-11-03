@@ -1,4 +1,4 @@
-package hospital;
+package hospital.dominio;
 
 public enum EstadoTurno {
     PENDIENTE,
