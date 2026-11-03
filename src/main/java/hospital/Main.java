@@ -1,14 +1,27 @@
 package hospital;
 
+import hospital.repositorio.DatosIniciales;
+import hospital.repositorio.PacienteRepositorioEnMemoria;
+import hospital.repositorio.ProfesionalRepositorioEnMemoria;
+import hospital.repositorio.TurnoRepositorioEnMemoria;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        Datos.cargar();
+        PacienteRepositorioEnMemoria pacientes = new PacienteRepositorioEnMemoria();
+        ProfesionalRepositorioEnMemoria profesionales = new ProfesionalRepositorioEnMemoria();
+        TurnoRepositorioEnMemoria turnos = new TurnoRepositorioEnMemoria();
+        DatosIniciales.cargarEn(pacientes, profesionales, turnos);
+
         Scanner sc = new Scanner(System.in);
-        TurnoManager tm = new TurnoManager();
-        ReporteManager rm = new ReporteManager();
+
+        // modulo de turnos
+        TurnoManager tm = new TurnoManager(turnos, pacientes, profesionales);
+
+        // modulo de busqueda y reportes
+        ReporteManager rm = new ReporteManager(turnos, pacientes, profesionales);
+
         boolean salir = false;
         while (!salir) {
             System.out.println();

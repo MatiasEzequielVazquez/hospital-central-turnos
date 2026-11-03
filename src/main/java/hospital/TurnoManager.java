@@ -4,31 +4,35 @@ import hospital.dominio.Paciente;
 import hospital.dominio.Profesional;
 import hospital.dominio.Turno;
 import hospital.dominio.TurnoInvalidoException;
+import hospital.repositorio.PacienteRepositorio;
+import hospital.repositorio.ProfesionalRepositorio;
+import hospital.repositorio.TurnoRepositorio;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class TurnoManager {
 
+    private final TurnoRepositorio turnos;
+    private final PacienteRepositorio pacientes;
+    private final ProfesionalRepositorio profesionales;
+
+    public TurnoManager(TurnoRepositorio turnos, PacienteRepositorio pacientes,
+                        ProfesionalRepositorio profesionales) {
+        this.turnos = turnos;
+        this.pacientes = pacientes;
+        this.profesionales = profesionales;
+    }
+
     // registra un turno nuevo
     public boolean agregarTurno(String dni, String mat, String fecha, String hora, boolean urg, String motivo) {
         // validar paciente
-        Paciente p = null;
-        for (int i = 0; i < Datos.pacientes.size(); i++) {
-            if (Datos.pacientes.get(i).dni().equals(dni)) {
-                p = Datos.pacientes.get(i);
-            }
-        }
+        Paciente p = pacientes.buscarPorDni(dni).orElse(null);
         if (p == null) {
             System.out.println("ERROR: el paciente " + dni + " no existe");
             return false;
         }
         // validar profesional
-        Profesional pr = null;
-        for (int i = 0; i < Datos.profesionales.size(); i++) {
-            if (Datos.profesionales.get(i).matricula().equals(mat)) {
-                pr = Datos.profesionales.get(i);
-            }
-        }
+        Profesional pr = profesionales.buscarPorMatricula(mat).orElse(null);
         if (pr == null) {
             System.out.println("ERROR: el profesional " + mat + " no existe");
             return false;
@@ -53,7 +57,7 @@ public class TurnoManager {
             return false;
         }
         // superposicion
-        for (Turno t : Datos.turnos) {
+        for (Turno t : turnos.listarTodos()) {
             if (t.ocupaHorario(mat, f, hr)) {
                 System.out.println("ERROR: el profesional ya tiene un turno en ese horario");
                 return false;
@@ -61,28 +65,22 @@ public class TurnoManager {
         }
         // un paciente no puede tener dos turnos pendientes salvo urgencia
         if (urg == false) {
-            for (Turno t : Datos.turnos) {
+            for (Turno t : turnos.listarTodos()) {
                 if (t.getDniPaciente().equals(dni) && t.estaPendiente()) {
                     System.out.println("ERROR: el paciente ya tiene un turno pendiente (solo se permite otro si es urgente)");
                     return false;
                 }
             }
         }
-        Datos.ultimoId++;
-        Turno t = new Turno(Datos.ultimoId, dni, mat, f, hr, urg, motivo);
-        Datos.turnos.add(t);
+        Turno t = new Turno(turnos.siguienteId(), dni, mat, f, hr, urg, motivo);
+        turnos.guardar(t);
         System.out.println("Turno #" + t.getId() + " registrado para " + p.nombre() + " con " + pr.nombre()
                 + " el " + t.getFecha() + " " + t.getHora() + (urg ? " [URGENTE]" : ""));
         return true;
     }
 
     public void cancelar(int id) {
-        Turno x = null;
-        for (Turno t : Datos.turnos) {
-            if (t.getId() == id) {
-                x = t;
-            }
-        }
+        Turno x = turnos.buscarPorId(id).orElse(null);
         if (x == null) {
             System.out.println("ERROR: no existe el turno #" + id);
             return;
@@ -96,12 +94,7 @@ public class TurnoManager {
     }
 
     public void atender(int id) {
-        Turno x = null;
-        for (Turno t : Datos.turnos) {
-            if (t.getId() == id) {
-                x = t;
-            }
-        }
+        Turno x = turnos.buscarPorId(id).orElse(null);
         if (x == null) {
             System.out.println("ERROR: no existe el turno #" + id);
             return;
