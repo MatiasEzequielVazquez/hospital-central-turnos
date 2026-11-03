@@ -1,0 +1,101 @@
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Matricula (vacio = todas): Estado PENDIENTE/ATENDIDO/CANCELADO (vacio = todos): Desde AAAA-MM-DD (vacio = sin limite): Hasta AAAA-MM-DD (vacio = sin limite): Solo urgentes (s/n): Se encontraron 3 turno(s):
+#1 | 2026-10-05 09:00 | Ana Gomez | Dra. Laura Perez | ATENDIDO
+#2 | 2026-10-05 10:00 | Bruno Diaz | Dr. Martin Lopez | ATENDIDO | URGENTE
+#3 | 2028-03-06 11:30 | Carla Ruiz | Dra. Sofia Medina | PENDIENTE
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Matricula (vacio = todas): Estado PENDIENTE/ATENDIDO/CANCELADO (vacio = todos): Desde AAAA-MM-DD (vacio = sin limite): Hasta AAAA-MM-DD (vacio = sin limite): Solo urgentes (s/n): Se encontraron 1 turno(s):
+#2 | 2026-10-05 10:00 | Bruno Diaz | Dr. Martin Lopez | ATENDIDO | URGENTE
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Matricula (vacio = todas): Estado PENDIENTE/ATENDIDO/CANCELADO (vacio = todos): Desde AAAA-MM-DD (vacio = sin limite): Hasta AAAA-MM-DD (vacio = sin limite): Solo urgentes (s/n): Se encontraron 1 turno(s):
+#3 | 2028-03-06 11:30 | Carla Ruiz | Dra. Sofia Medina | PENDIENTE
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Matricula (vacio = todas): Estado PENDIENTE/ATENDIDO/CANCELADO (vacio = todos): Desde AAAA-MM-DD (vacio = sin limite): Hasta AAAA-MM-DD (vacio = sin limite): Solo urgentes (s/n): Se encontraron 1 turno(s):
+#3 | 2028-03-06 11:30 | Carla Ruiz | Dra. Sofia Medina | PENDIENTE
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Matricula (vacio = todas): Estado PENDIENTE/ATENDIDO/CANCELADO (vacio = todos): Desde AAAA-MM-DD (vacio = sin limite): Hasta AAAA-MM-DD (vacio = sin limite): Solo urgentes (s/n): Se encontraron 2 turno(s):
+#1 | 2026-10-05 09:00 | Ana Gomez | Dra. Laura Perez | ATENDIDO
+#2 | 2026-10-05 10:00 | Bruno Diaz | Dr. Martin Lopez | ATENDIDO | URGENTE
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Matricula (vacio = todas): Estado PENDIENTE/ATENDIDO/CANCELADO (vacio = todos): Desde AAAA-MM-DD (vacio = sin limite): Hasta AAAA-MM-DD (vacio = sin limite): Solo urgentes (s/n): Se encontraron 1 turno(s):
+#2 | 2026-10-05 10:00 | Bruno Diaz | Dr. Martin Lopez | ATENDIDO | URGENTE
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Matricula (vacio = todas): Estado PENDIENTE/ATENDIDO/CANCELADO (vacio = todos): Desde AAAA-MM-DD (vacio = sin limite): Hasta AAAA-MM-DD (vacio = sin limite): Solo urgentes (s/n): Se encontraron 2 turno(s):
+#1 | 2026-10-05 09:00 | Ana Gomez | Dra. Laura Perez | ATENDIDO
+#2 | 2026-10-05 10:00 | Bruno Diaz | Dr. Martin Lopez | ATENDIDO | URGENTE
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Matricula (vacio = todas): Estado PENDIENTE/ATENDIDO/CANCELADO (vacio = todos): Desde AAAA-MM-DD (vacio = sin limite): Hasta AAAA-MM-DD (vacio = sin limite): Solo urgentes (s/n): No se encontraron turnos
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Matricula (vacio = todas): Estado PENDIENTE/ATENDIDO/CANCELADO (vacio = todos): Desde AAAA-MM-DD (vacio = sin limite): Hasta AAAA-MM-DD (vacio = sin limite): Solo urgentes (s/n): No se encontraron turnos
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Hasta luego
