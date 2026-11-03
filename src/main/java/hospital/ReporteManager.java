@@ -11,7 +11,7 @@ public class ReporteManager {
         for (Turno t : Datos.turnos) {
             boolean ok = true;
             if (mat != null && !mat.isEmpty() && !t.mat.equals(mat)) ok = false;
-            if (estado != null && !estado.isEmpty() && !t.estado.equals(estado.toUpperCase())) ok = false;
+            if (estado != null && !estado.isEmpty() && !t.estado.name().equals(estado.toUpperCase())) ok = false;
             if (desde != null && !desde.isEmpty() && t.fecha.compareTo(desde) < 0) ok = false;
             if (hasta != null && !hasta.isEmpty() && t.fecha.compareTo(hasta) > 0) ok = false;
             if (soloUrg && !t.urg) ok = false;
@@ -39,9 +39,9 @@ public class ReporteManager {
     public void reporte() {
         int pend = 0, aten = 0, canc = 0;
         for (Turno t : Datos.turnos) {
-            if (t.estado.equals("PENDIENTE")) pend++;
-            else if (t.estado.equals("ATENDIDO")) aten++;
-            else if (t.estado.equals("CANCELADO")) canc++;
+            if (t.estado == EstadoTurno.PENDIENTE) pend++;
+            else if (t.estado == EstadoTurno.ATENDIDO) aten++;
+            else if (t.estado == EstadoTurno.CANCELADO) canc++;
         }
         System.out.println("===== REPORTE GENERAL =====");
         System.out.println("Total de turnos: " + Datos.turnos.size());
@@ -52,14 +52,14 @@ public class ReporteManager {
         for (Profesional pr : Datos.profesionales) {
             int c = 0;
             for (Turno t : Datos.turnos) {
-                if (t.mat.equals(pr.matricula) && !t.estado.equals("CANCELADO")) c++;
+                if (t.mat.equals(pr.matricula) && t.estado != EstadoTurno.CANCELADO) c++;
             }
             System.out.println(pr.nombre + " (" + pr.especialidad + "): " + c);
         }
         System.out.println("--- Facturacion estimada (turnos atendidos) ---");
         double total = 0, pac = 0, os = 0;
         for (Turno t : Datos.turnos) {
-            if (t.estado.equals("ATENDIDO")) {
+            if (t.estado == EstadoTurno.ATENDIDO) {
                 Profesional pr = null;
                 for (Profesional x : Datos.profesionales) {
                     if (x.matricula.equals(t.mat)) pr = x;

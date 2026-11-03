@@ -49,7 +49,7 @@ public class TurnoManager {
         }
         // superposicion
         for (Turno t : Datos.turnos) {
-            if (t.mat.equals(mat) && t.fecha.equals(fecha) && t.hora.equals(hora) && !t.estado.equals("CANCELADO")) {
+            if (t.mat.equals(mat) && t.fecha.equals(fecha) && t.hora.equals(hora) && t.estado != EstadoTurno.CANCELADO) {
                 System.out.println("ERROR: el profesional ya tiene un turno en ese horario");
                 return false;
             }
@@ -57,7 +57,7 @@ public class TurnoManager {
         // un paciente no puede tener dos turnos pendientes salvo urgencia
         if (urg == false) {
             for (Turno t : Datos.turnos) {
-                if (t.dni.equals(dni) && t.estado.equals("PENDIENTE")) {
+                if (t.dni.equals(dni) && t.estado == EstadoTurno.PENDIENTE) {
                     System.out.println("ERROR: el paciente ya tiene un turno pendiente (solo se permite otro si es urgente)");
                     return false;
                 }
@@ -70,7 +70,7 @@ public class TurnoManager {
         t.mat = mat;
         t.fecha = fecha;
         t.hora = hora;
-        t.estado = "PENDIENTE";
+        t.estado = EstadoTurno.PENDIENTE;
         t.urg = urg;
         t.motivo = motivo;
         Datos.turnos.add(t);
@@ -90,15 +90,15 @@ public class TurnoManager {
             System.out.println("ERROR: no existe el turno #" + id);
             return;
         }
-        if (x.estado.equals("ATENDIDO")) {
+        if (x.estado == EstadoTurno.ATENDIDO) {
             System.out.println("ERROR: no se puede cancelar un turno ya atendido");
             return;
         }
-        if (x.estado.equals("CANCELADO")) {
+        if (x.estado == EstadoTurno.CANCELADO) {
             System.out.println("ERROR: el turno ya estaba cancelado");
             return;
         }
-        x.estado = "CANCELADO";
+        x.estado = EstadoTurno.CANCELADO;
         System.out.println("Turno #" + id + " cancelado");
     }
 
@@ -113,15 +113,15 @@ public class TurnoManager {
             System.out.println("ERROR: no existe el turno #" + id);
             return;
         }
-        if (x.estado.equals("CANCELADO")) {
+        if (x.estado == EstadoTurno.CANCELADO) {
             System.out.println("ERROR: no se puede atender un turno cancelado");
             return;
         }
-        if (x.estado.equals("ATENDIDO")) {
+        if (x.estado == EstadoTurno.ATENDIDO) {
             System.out.println("ERROR: el turno ya fue atendido");
             return;
         }
-        x.estado = "ATENDIDO";
+        x.estado = EstadoTurno.ATENDIDO;
         System.out.println("Turno #" + id + " marcado como atendido");
     }
 }

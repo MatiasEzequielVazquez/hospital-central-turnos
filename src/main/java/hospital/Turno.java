@@ -6,7 +6,7 @@ public class Turno {
     public String mat;
     public String fecha;   // formato AAAA-MM-DD
     public String hora;    // formato HH:MM
-    public String estado;  // PENDIENTE, ATENDIDO o CANCELADO
+    public EstadoTurno estado;
     public boolean urg;
     public String motivo;
 }
