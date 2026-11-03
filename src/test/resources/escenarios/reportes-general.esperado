@@ -1,0 +1,96 @@
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: ===== REPORTE GENERAL =====
+Total de turnos: 3
+Pendientes: 1
+Atendidos: 2
+Cancelados: 0
+--- Turnos activos por profesional ---
+Dra. Laura Perez (CLINICA): 1
+Dr. Martin Lopez (CARDIOLOGIA): 1
+Dra. Sofia Medina (PEDIATRIA): 1
+--- Facturacion estimada (turnos atendidos) ---
+Importe total: $28000.00
+A cargo de pacientes: $1000.00
+A cargo de obras sociales: $27000.00
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: DNI paciente: Matricula profesional: Fecha (AAAA-MM-DD): Hora (HH:MM): Urgente (s/n): Motivo: Turno #4 registrado para Diego Sosa con Dr. Martin Lopez el 2028-04-01 10:00 [URGENTE]
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Id de turno: Turno #4 marcado como atendido
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Id de turno: Turno #3 marcado como atendido
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: DNI paciente: Matricula profesional: Fecha (AAAA-MM-DD): Hora (HH:MM): Urgente (s/n): Motivo: Turno #5 registrado para Ana Gomez con Dra. Sofia Medina el 2028-04-02 12:00
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Id de turno: Turno #5 cancelado
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: ===== REPORTE GENERAL =====
+Total de turnos: 5
+Pendientes: 0
+Atendidos: 4
+Cancelados: 1
+--- Turnos activos por profesional ---
+Dra. Laura Perez (CLINICA): 1
+Dr. Martin Lopez (CARDIOLOGIA): 2
+Dra. Sofia Medina (PEDIATRIA): 1
+--- Facturacion estimada (turnos atendidos) ---
+Importe total: $58000.00
+A cargo de pacientes: $14800.00
+A cargo de obras sociales: $43200.00
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Hasta luego
