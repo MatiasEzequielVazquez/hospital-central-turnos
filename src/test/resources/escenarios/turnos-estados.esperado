@@ -1,0 +1,126 @@
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Id de turno: Turno #3 cancelado
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Id de turno: ERROR: el turno ya estaba cancelado
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Id de turno: ERROR: no se puede cancelar un turno ya atendido
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Id de turno: ERROR: no existe el turno #99
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Id de turno: ERROR: id invalido
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Id de turno: ERROR: el turno ya fue atendido
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Id de turno: ERROR: no se puede atender un turno cancelado
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Id de turno: ERROR: no existe el turno #99
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Id de turno: ERROR: id invalido
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: DNI paciente: Matricula profesional: Fecha (AAAA-MM-DD): Hora (HH:MM): Urgente (s/n): Motivo: Turno #4 registrado para Diego Sosa con Dr. Martin Lopez el 2028-04-01 08:00
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Id de turno: Turno #4 marcado como atendido
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Id de turno: ERROR: el turno ya fue atendido
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Id de turno: ERROR: no se puede cancelar un turno ya atendido
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Hasta luego

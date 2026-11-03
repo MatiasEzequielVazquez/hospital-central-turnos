@@ -1,0 +1,71 @@
+1
+35123456
+MN1001
+2028-03-06
+09:30
+n
+Dolor de cabeza
+1
+99999999
+MN1001
+2028-03-07
+10:00
+n
+Paciente inexistente
+1
+30111222
+MN9999
+2028-03-07
+10:00
+n
+Profesional inexistente
+1
+30111222
+MN1001
+2028-13-40
+10:00
+n
+Fecha invalida
+1
+30111222
+MN1001
+2028-03-07
+10:7
+n
+Hora invalida
+1
+30111222
+MN1001
+2020-01-01
+10:00
+n
+Fecha pasada
+1
+30111222
+MN1001
+2028-03-07
+21:00
+n
+Fuera de horario
+1
+30111222
+mn3003
+2028-03-06
+11:30
+n
+Superposicion
+1
+40555666
+MN1001
+2028-03-07
+10:00
+n
+Segundo turno pendiente
+1
+40555666
+MN1001
+2028-03-07
+10:00
+s
+Segundo turno urgente
+0

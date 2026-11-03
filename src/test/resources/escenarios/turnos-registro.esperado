@@ -1,0 +1,99 @@
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: DNI paciente: Matricula profesional: Fecha (AAAA-MM-DD): Hora (HH:MM): Urgente (s/n): Motivo: Turno #4 registrado para Diego Sosa con Dra. Laura Perez el 2028-03-06 09:30
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: DNI paciente: Matricula profesional: Fecha (AAAA-MM-DD): Hora (HH:MM): Urgente (s/n): Motivo: ERROR: el paciente 99999999 no existe
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: DNI paciente: Matricula profesional: Fecha (AAAA-MM-DD): Hora (HH:MM): Urgente (s/n): Motivo: ERROR: el profesional MN9999 no existe
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: DNI paciente: Matricula profesional: Fecha (AAAA-MM-DD): Hora (HH:MM): Urgente (s/n): Motivo: ERROR: fecha u hora invalida
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: DNI paciente: Matricula profesional: Fecha (AAAA-MM-DD): Hora (HH:MM): Urgente (s/n): Motivo: ERROR: fecha u hora invalida
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: DNI paciente: Matricula profesional: Fecha (AAAA-MM-DD): Hora (HH:MM): Urgente (s/n): Motivo: ERROR: no se pueden dar turnos en fechas pasadas
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: DNI paciente: Matricula profesional: Fecha (AAAA-MM-DD): Hora (HH:MM): Urgente (s/n): Motivo: ERROR: fuera del horario de atencion (08 a 20)
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: DNI paciente: Matricula profesional: Fecha (AAAA-MM-DD): Hora (HH:MM): Urgente (s/n): Motivo: ERROR: el profesional ya tiene un turno en ese horario
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: DNI paciente: Matricula profesional: Fecha (AAAA-MM-DD): Hora (HH:MM): Urgente (s/n): Motivo: ERROR: el paciente ya tiene un turno pendiente (solo se permite otro si es urgente)
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: DNI paciente: Matricula profesional: Fecha (AAAA-MM-DD): Hora (HH:MM): Urgente (s/n): Motivo: Turno #5 registrado para Carla Ruiz con Dra. Laura Perez el 2028-03-07 10:00 [URGENTE]
+
+=== HOSPITAL CENTRAL - TURNOS ===
+1) Registrar turno
+2) Cancelar turno
+3) Marcar turno como atendido
+4) Buscar turnos
+5) Reporte general
+0) Salir
+Opcion: Hasta luego
