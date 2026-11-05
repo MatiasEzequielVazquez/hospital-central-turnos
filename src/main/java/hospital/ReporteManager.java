@@ -1,20 +1,38 @@
 package hospital;
 
+import hospital.dominio.EstadoTurno;
+import hospital.dominio.Paciente;
+import hospital.dominio.Profesional;
+import hospital.dominio.Turno;
+import hospital.repositorio.PacienteRepositorio;
+import hospital.repositorio.ProfesionalRepositorio;
+import hospital.repositorio.TurnoRepositorio;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReporteManager {
 
+    private final TurnoRepositorio turnos;
+    private final PacienteRepositorio pacientes;
+    private final ProfesionalRepositorio profesionales;
+
+    public ReporteManager(TurnoRepositorio turnos, PacienteRepositorio pacientes,
+                          ProfesionalRepositorio profesionales) {
+        this.turnos = turnos;
+        this.pacientes = pacientes;
+        this.profesionales = profesionales;
+    }
+
     // busca turnos; los parametros vacios o null significan "sin filtro"
     public void buscar(String mat, String estado, String desde, String hasta, boolean soloUrg) {
         List<Turno> lista2 = new ArrayList<>();
-        for (Turno t : Datos.turnos) {
+        for (Turno t : turnos.listarTodos()) {
             boolean ok = true;
-            if (mat != null && !mat.isEmpty() && !t.mat.equals(mat)) ok = false;
-            if (estado != null && !estado.isEmpty() && !t.estado.equals(estado.toUpperCase())) ok = false;
-            if (desde != null && !desde.isEmpty() && t.fecha.compareTo(desde) < 0) ok = false;
-            if (hasta != null && !hasta.isEmpty() && t.fecha.compareTo(hasta) > 0) ok = false;
-            if (soloUrg && !t.urg) ok = false;
+            if (mat != null && !mat.isEmpty() && !t.getMatriculaProfesional().equals(mat)) ok = false;
+            if (estado != null && !estado.isEmpty() && !t.getEstado().name().equals(estado.toUpperCase())) ok = false;
+            if (desde != null && !desde.isEmpty() && t.getFecha().toString().compareTo(desde) < 0) ok = false;
+            if (hasta != null && !hasta.isEmpty() && t.getFecha().toString().compareTo(hasta) > 0) ok = false;
+            if (soloUrg && !t.isUrgente()) ok = false;
             if (ok) lista2.add(t);
         }
         if (lista2.isEmpty()) {
@@ -23,58 +41,46 @@ public class ReporteManager {
         }
         System.out.println("Se encontraron " + lista2.size() + " turno(s):");
         for (Turno t : lista2) {
-            String nom = "";
-            for (Paciente p : Datos.pacientes) {
-                if (p.dni.equals(t.dni)) nom = p.nombre;
-            }
-            String nomPr = "";
-            for (Profesional pr : Datos.profesionales) {
-                if (pr.matricula.equals(t.mat)) nomPr = pr.nombre;
-            }
-            System.out.println("#" + t.id + " | " + t.fecha + " " + t.hora + " | " + nom + " | " + nomPr
-                    + " | " + t.estado + (t.urg ? " | URGENTE" : ""));
+            String nom = pacientes.buscarPorDni(t.getDniPaciente()).map(Paciente::nombre).orElse("");
+            String nomPr = profesionales.buscarPorMatricula(t.getMatriculaProfesional()).map(Profesional::nombre).orElse("");
+            System.out.println("#" + t.getId() + " | " + t.getFecha() + " " + t.getHora() + " | " + nom + " | " + nomPr
+                    + " | " + t.getEstado() + (t.isUrgente() ? " | URGENTE" : ""));
         }
     }
 
     public void reporte() {
         int pend = 0, aten = 0, canc = 0;
-        for (Turno t : Datos.turnos) {
-            if (t.estado.equals("PENDIENTE")) pend++;
-            else if (t.estado.equals("ATENDIDO")) aten++;
-            else if (t.estado.equals("CANCELADO")) canc++;
+        for (Turno t : turnos.listarTodos()) {
+            if (t.getEstado() == EstadoTurno.PENDIENTE) pend++;
+            else if (t.getEstado() == EstadoTurno.ATENDIDO) aten++;
+            else if (t.getEstado() == EstadoTurno.CANCELADO) canc++;
         }
         System.out.println("===== REPORTE GENERAL =====");
-        System.out.println("Total de turnos: " + Datos.turnos.size());
+        System.out.println("Total de turnos: " + turnos.listarTodos().size());
         System.out.println("Pendientes: " + pend);
         System.out.println("Atendidos: " + aten);
         System.out.println("Cancelados: " + canc);
         System.out.println("--- Turnos activos por profesional ---");
-        for (Profesional pr : Datos.profesionales) {
+        for (Profesional pr : profesionales.listarTodos()) {
             int c = 0;
-            for (Turno t : Datos.turnos) {
-                if (t.mat.equals(pr.matricula) && !t.estado.equals("CANCELADO")) c++;
+            for (Turno t : turnos.listarTodos()) {
+                if (t.getMatriculaProfesional().equals(pr.matricula()) && t.estaActivo()) c++;
             }
-            System.out.println(pr.nombre + " (" + pr.especialidad + "): " + c);
+            System.out.println(pr.nombre() + " (" + pr.especialidad() + "): " + c);
         }
         System.out.println("--- Facturacion estimada (turnos atendidos) ---");
         double total = 0, pac = 0, os = 0;
-        for (Turno t : Datos.turnos) {
-            if (t.estado.equals("ATENDIDO")) {
-                Profesional pr = null;
-                for (Profesional x : Datos.profesionales) {
-                    if (x.matricula.equals(t.mat)) pr = x;
-                }
-                Paciente p = null;
-                for (Paciente x : Datos.pacientes) {
-                    if (x.dni.equals(t.dni)) p = x;
-                }
+        for (Turno t : turnos.listarTodos()) {
+            if (t.getEstado() == EstadoTurno.ATENDIDO) {
+                Profesional pr = profesionales.buscarPorMatricula(t.getMatriculaProfesional()).orElseThrow();
+                Paciente p = pacientes.buscarPorDni(t.getDniPaciente()).orElseThrow();
                 double precio = 0;
-                if (pr.especialidad.equals("CLINICA")) precio = 10000;
-                else if (pr.especialidad.equals("CARDIOLOGIA")) precio = 15000;
-                else if (pr.especialidad.equals("PEDIATRIA")) precio = 12000;
-                if (t.urg) precio = precio * 1.2;
+                if (pr.especialidad().equals("CLINICA")) precio = 10000;
+                else if (pr.especialidad().equals("CARDIOLOGIA")) precio = 15000;
+                else if (pr.especialidad().equals("PEDIATRIA")) precio = 12000;
+                if (t.isUrgente()) precio = precio * 1.2;
                 double cos = 0;
-                switch (p.obraSocial) {
+                switch (p.obraSocial()) {
                     case "OSDE":
                         cos = precio * 0.1;
                         break;
