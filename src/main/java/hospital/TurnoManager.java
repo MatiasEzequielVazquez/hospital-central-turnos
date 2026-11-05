@@ -7,6 +7,7 @@ import hospital.dominio.TurnoInvalidoException;
 import hospital.repositorio.PacienteRepositorio;
 import hospital.repositorio.ProfesionalRepositorio;
 import hospital.repositorio.TurnoRepositorio;
+import hospital.turnos.SolicitudTurno;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -24,25 +25,25 @@ public class TurnoManager {
     }
 
     // registra un turno nuevo
-    public boolean agregarTurno(String dni, String mat, String fecha, String hora, boolean urg, String motivo) {
+    public boolean agregarTurno(SolicitudTurno solicitud) {
         // validar paciente
-        Paciente p = pacientes.buscarPorDni(dni).orElse(null);
+        Paciente p = pacientes.buscarPorDni(solicitud.dniPaciente()).orElse(null);
         if (p == null) {
-            System.out.println("ERROR: el paciente " + dni + " no existe");
+            System.out.println("ERROR: el paciente " + solicitud.dniPaciente() + " no existe");
             return false;
         }
         // validar profesional
-        Profesional pr = profesionales.buscarPorMatricula(mat).orElse(null);
+        Profesional pr = profesionales.buscarPorMatricula(solicitud.matriculaProfesional()).orElse(null);
         if (pr == null) {
-            System.out.println("ERROR: el profesional " + mat + " no existe");
+            System.out.println("ERROR: el profesional " + solicitud.matriculaProfesional() + " no existe");
             return false;
         }
         // validar fecha y hora
         LocalDate f;
         LocalTime hr;
         try {
-            f = LocalDate.parse(fecha);
-            hr = LocalTime.parse(hora);
+            f = LocalDate.parse(solicitud.fecha());
+            hr = LocalTime.parse(solicitud.hora());
         } catch (Exception e) {
             System.out.println("ERROR: fecha u hora invalida");
             return false;
@@ -58,24 +59,25 @@ public class TurnoManager {
         }
         // superposicion
         for (Turno t : turnos.listarTodos()) {
-            if (t.ocupaHorario(mat, f, hr)) {
+            if (t.ocupaHorario(solicitud.matriculaProfesional(), f, hr)) {
                 System.out.println("ERROR: el profesional ya tiene un turno en ese horario");
                 return false;
             }
         }
         // un paciente no puede tener dos turnos pendientes salvo urgencia
-        if (urg == false) {
+        if (!solicitud.urgente()) {
             for (Turno t : turnos.listarTodos()) {
-                if (t.getDniPaciente().equals(dni) && t.estaPendiente()) {
+                if (t.getDniPaciente().equals(solicitud.dniPaciente()) && t.estaPendiente()) {
                     System.out.println("ERROR: el paciente ya tiene un turno pendiente (solo se permite otro si es urgente)");
                     return false;
                 }
             }
         }
-        Turno t = new Turno(turnos.siguienteId(), dni, mat, f, hr, urg, motivo);
+        Turno t = new Turno(turnos.siguienteId(), solicitud.dniPaciente(),
+                solicitud.matriculaProfesional(), f, hr, solicitud.urgente(), solicitud.motivo());
         turnos.guardar(t);
         System.out.println("Turno #" + t.getId() + " registrado para " + p.nombre() + " con " + pr.nombre()
-                + " el " + t.getFecha() + " " + t.getHora() + (urg ? " [URGENTE]" : ""));
+                + " el " + t.getFecha() + " " + t.getHora() + (solicitud.urgente() ? " [URGENTE]" : ""));
         return true;
     }
 

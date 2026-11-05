@@ -4,6 +4,7 @@ import hospital.repositorio.DatosIniciales;
 import hospital.repositorio.PacienteRepositorioEnMemoria;
 import hospital.repositorio.ProfesionalRepositorioEnMemoria;
 import hospital.repositorio.TurnoRepositorioEnMemoria;
+import hospital.turnos.SolicitudTurno;
 import java.util.Scanner;
 
 public class Main {
@@ -51,7 +52,7 @@ public class Main {
                     boolean urg = sc.nextLine().trim().equalsIgnoreCase("s");
                     System.out.print("Motivo: ");
                     String motivo = sc.nextLine().trim();
-                    tm.agregarTurno(dni, mat, fecha, hora, urg, motivo);
+                    tm.agregarTurno(new SolicitudTurno(dni, mat, fecha, hora, urg, motivo));
                     break;
                 case "2":
                     System.out.print("Id de turno: ");
