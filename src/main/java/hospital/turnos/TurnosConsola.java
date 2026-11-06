@@ -3,6 +3,7 @@ package hospital.turnos;
 import hospital.dominio.Turno;
 import hospital.dominio.TurnoInvalidoException;
 import java.util.Scanner;
+import java.util.function.IntFunction;
 
 /** Interaccion por consola de los casos de uso de turnos (opciones 1 a 3 del menu). */
 public class TurnosConsola {
@@ -24,34 +25,38 @@ public class TurnosConsola {
                     + " con " + registrado.profesional().nombre() + " el " + turno.getFecha() + " "
                     + turno.getHora() + (turno.isUrgente() ? " [URGENTE]" : ""));
         } catch (TurnoInvalidoException e) {
-            System.out.println("ERROR: " + e.getMessage());
+            informarError(e.getMessage());
         }
     }
 
     public void cancelar() {
-        System.out.print("Id de turno: ");
-        try {
-            int idTurno = Integer.parseInt(entrada.nextLine().trim());
+        operarSobreTurno(idTurno -> {
             servicio.cancelar(idTurno);
-            System.out.println("Turno #" + idTurno + " cancelado");
-        } catch (NumberFormatException e) {
-            System.out.println("ERROR: id invalido");
-        } catch (TurnoInvalidoException e) {
-            System.out.println("ERROR: " + e.getMessage());
-        }
+            return "Turno #" + idTurno + " cancelado";
+        });
     }
 
     public void atender() {
-        System.out.print("Id de turno: ");
-        try {
-            int idTurno = Integer.parseInt(entrada.nextLine().trim());
+        operarSobreTurno(idTurno -> {
             servicio.atender(idTurno);
-            System.out.println("Turno #" + idTurno + " marcado como atendido");
+            return "Turno #" + idTurno + " marcado como atendido";
+        });
+    }
+
+    /** Pide un id, ejecuta la operacion e informa el resultado o el error. */
+    private void operarSobreTurno(IntFunction<String> operacion) {
+        String texto = preguntar("Id de turno: ");
+        try {
+            System.out.println(operacion.apply(Integer.parseInt(texto)));
         } catch (NumberFormatException e) {
-            System.out.println("ERROR: id invalido");
+            informarError("id invalido");
         } catch (TurnoInvalidoException e) {
-            System.out.println("ERROR: " + e.getMessage());
+            informarError(e.getMessage());
         }
+    }
+
+    private void informarError(String mensaje) {
+        System.out.println("ERROR: " + mensaje);
     }
 
     private SolicitudTurno leerSolicitud() {

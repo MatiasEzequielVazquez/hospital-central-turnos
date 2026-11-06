@@ -10,6 +10,9 @@ import java.time.LocalTime;
 /** Reglas de negocio que debe cumplir un turno nuevo antes de registrarse. */
 public class ValidadorTurno {
 
+    private static final LocalTime APERTURA = LocalTime.of(8, 0);
+    private static final LocalTime CIERRE = LocalTime.of(20, 0);
+
     private final TurnoRepositorio turnos;
     private final Clock reloj;
 
@@ -32,7 +35,7 @@ public class ValidadorTurno {
     }
 
     private void validarHorarioDeAtencion(LocalTime hora) {
-        if (hora.getHour() < 8 || hora.getHour() >= 20) {
+        if (hora.isBefore(APERTURA) || !hora.isBefore(CIERRE)) {
             throw new TurnoInvalidoException("fuera del horario de atencion (08 a 20)");
         }
     }
