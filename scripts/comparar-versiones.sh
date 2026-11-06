@@ -22,7 +22,11 @@ trap limpiar EXIT
 compilar() {
     local nombre="$1" ref="$2"
     git -C "$RAIZ" worktree add --detach "$TMP/$nombre" "$ref" >/dev/null 2>&1
-    find "$TMP/$nombre/src/main/java" -name "*.java" | sed 's/.*/"&"/' > "$TMP/$nombre-fuentes.txt"
+    # En Git Bash (Windows) javac es un programa nativo: las rutas dentro del archivo @ no se
+    # convierten solas, asi que se pasan a formato Windows con cygpath si esta disponible.
+    find "$TMP/$nombre/src/main/java" -name "*.java" \
+        | { if command -v cygpath >/dev/null 2>&1; then cygpath -m -f -; else cat; fi; } \
+        | sed 's/.*/"&"/' > "$TMP/$nombre-fuentes.txt"
     javac -d "$TMP/$nombre-bin" "@$TMP/$nombre-fuentes.txt"
 }
 
