@@ -6,6 +6,8 @@ import hospital.repositorio.ProfesionalRepositorioEnMemoria;
 import hospital.repositorio.TurnoRepositorioEnMemoria;
 import hospital.turnos.TurnoService;
 import hospital.turnos.TurnosConsola;
+import hospital.turnos.ValidadorTurno;
+import java.time.Clock;
 import java.util.Scanner;
 
 public class Main {
@@ -20,7 +22,8 @@ public class Main {
 
         // modulo de turnos
         TurnosConsola turnosConsola = new TurnosConsola(sc,
-                new TurnoService(turnos, pacientes, profesionales));
+                new TurnoService(turnos, pacientes, profesionales,
+                        new ValidadorTurno(turnos, Clock.systemDefaultZone())));
 
         // modulo de busqueda y reportes
         ReporteManager rm = new ReporteManager(turnos, pacientes, profesionales);
