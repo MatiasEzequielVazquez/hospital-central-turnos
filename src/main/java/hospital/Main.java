@@ -1,5 +1,6 @@
 package hospital;
 
+import hospital.reportes.FiltroTurnos;
 import hospital.repositorio.DatosIniciales;
 import hospital.repositorio.PacienteRepositorioEnMemoria;
 import hospital.repositorio.ProfesionalRepositorioEnMemoria;
@@ -80,7 +81,7 @@ public class Main {
                     String h = sc.nextLine().trim();
                     System.out.print("Solo urgentes (s/n): ");
                     boolean su = sc.nextLine().trim().equalsIgnoreCase("s");
-                    rm.buscar(m, e, d, h, su);
+                    rm.buscar(new FiltroTurnos(m, e, d, h, su));
                     break;
                 case "5":
                     rm.reporte();

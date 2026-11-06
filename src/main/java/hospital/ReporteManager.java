@@ -4,6 +4,7 @@ import hospital.dominio.EstadoTurno;
 import hospital.dominio.Paciente;
 import hospital.dominio.Profesional;
 import hospital.dominio.Turno;
+import hospital.reportes.FiltroTurnos;
 import hospital.repositorio.PacienteRepositorio;
 import hospital.repositorio.ProfesionalRepositorio;
 import hospital.repositorio.TurnoRepositorio;
@@ -23,17 +24,10 @@ public class ReporteManager {
         this.profesionales = profesionales;
     }
 
-    // busca turnos; los parametros vacios o null significan "sin filtro"
-    public void buscar(String mat, String estado, String desde, String hasta, boolean soloUrg) {
+    public void buscar(FiltroTurnos filtro) {
         List<Turno> lista2 = new ArrayList<>();
         for (Turno t : turnos.listarTodos()) {
-            boolean ok = true;
-            if (mat != null && !mat.isEmpty() && !t.getMatriculaProfesional().equals(mat)) ok = false;
-            if (estado != null && !estado.isEmpty() && !t.getEstado().name().equals(estado.toUpperCase())) ok = false;
-            if (desde != null && !desde.isEmpty() && t.getFecha().toString().compareTo(desde) < 0) ok = false;
-            if (hasta != null && !hasta.isEmpty() && t.getFecha().toString().compareTo(hasta) > 0) ok = false;
-            if (soloUrg && !t.isUrgente()) ok = false;
-            if (ok) lista2.add(t);
+            if (filtro.acepta(t)) lista2.add(t);
         }
         if (lista2.isEmpty()) {
             System.out.println("No se encontraron turnos");
