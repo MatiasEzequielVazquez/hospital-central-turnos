@@ -1,4 +1,4 @@
 package hospital.dominio;
 
-public record Paciente(String dni, String nombre, String obraSocial) {
+public record Paciente(String dni, String nombre, ObraSocial obraSocial) {
 }

@@ -1,5 +1,7 @@
 package hospital.repositorio;
 
+import hospital.dominio.Especialidad;
+import hospital.dominio.ObraSocial;
 import hospital.dominio.Paciente;
 import hospital.dominio.Profesional;
 import hospital.dominio.Turno;
@@ -15,14 +17,14 @@ public final class DatosIniciales {
     public static void cargarEn(PacienteRepositorioEnMemoria pacientes,
                                 ProfesionalRepositorioEnMemoria profesionales,
                                 TurnoRepositorioEnMemoria turnos) {
-        pacientes.agregar(new Paciente("30111222", "Ana Gomez", "OSDE"));
-        pacientes.agregar(new Paciente("28999888", "Bruno Diaz", "PAMI"));
-        pacientes.agregar(new Paciente("40555666", "Carla Ruiz", "PARTICULAR"));
-        pacientes.agregar(new Paciente("35123456", "Diego Sosa", "SWISS"));
+        pacientes.agregar(new Paciente("30111222", "Ana Gomez", ObraSocial.OSDE));
+        pacientes.agregar(new Paciente("28999888", "Bruno Diaz", ObraSocial.PAMI));
+        pacientes.agregar(new Paciente("40555666", "Carla Ruiz", ObraSocial.PARTICULAR));
+        pacientes.agregar(new Paciente("35123456", "Diego Sosa", ObraSocial.SWISS));
 
-        profesionales.agregar(new Profesional("MN1001", "Dra. Laura Perez", "CLINICA"));
-        profesionales.agregar(new Profesional("MN2002", "Dr. Martin Lopez", "CARDIOLOGIA"));
-        profesionales.agregar(new Profesional("MN3003", "Dra. Sofia Medina", "PEDIATRIA"));
+        profesionales.agregar(new Profesional("MN1001", "Dra. Laura Perez", Especialidad.CLINICA));
+        profesionales.agregar(new Profesional("MN2002", "Dr. Martin Lopez", Especialidad.CARDIOLOGIA));
+        profesionales.agregar(new Profesional("MN3003", "Dra. Sofia Medina", Especialidad.PEDIATRIA));
 
         Turno controlAnual = new Turno(1, "30111222", "MN1001",
                 LocalDate.of(2026, 10, 5), LocalTime.of(9, 0), false, "Control anual");

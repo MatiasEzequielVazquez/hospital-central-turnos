@@ -1,5 +1,6 @@
 package hospital;
 
+import hospital.reportes.CalculadoraArancel;
 import hospital.reportes.FiltroTurnos;
 import hospital.repositorio.DatosIniciales;
 import hospital.repositorio.PacienteRepositorioEnMemoria;
@@ -21,7 +22,8 @@ public class Main {
         TurnoManager tm = new TurnoManager(turnos, pacientes, profesionales);
 
         // modulo de busqueda y reportes
-        ReporteManager rm = new ReporteManager(turnos, pacientes, profesionales);
+        ReporteManager rm = new ReporteManager(turnos, pacientes, profesionales,
+                new CalculadoraArancel());
 
         boolean salir = false;
         while (!salir) {

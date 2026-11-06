@@ -4,6 +4,8 @@ import hospital.dominio.EstadoTurno;
 import hospital.dominio.Paciente;
 import hospital.dominio.Profesional;
 import hospital.dominio.Turno;
+import hospital.reportes.CalculadoraArancel;
+import hospital.reportes.DetalleFacturacion;
 import hospital.reportes.FiltroTurnos;
 import hospital.repositorio.PacienteRepositorio;
 import hospital.repositorio.ProfesionalRepositorio;
@@ -16,12 +18,14 @@ public class ReporteManager {
     private final TurnoRepositorio turnos;
     private final PacienteRepositorio pacientes;
     private final ProfesionalRepositorio profesionales;
+    private final CalculadoraArancel calculadora;
 
     public ReporteManager(TurnoRepositorio turnos, PacienteRepositorio pacientes,
-                          ProfesionalRepositorio profesionales) {
+                          ProfesionalRepositorio profesionales, CalculadoraArancel calculadora) {
         this.turnos = turnos;
         this.pacientes = pacientes;
         this.profesionales = profesionales;
+        this.calculadora = calculadora;
     }
 
     public void buscar(FiltroTurnos filtro) {
@@ -63,37 +67,16 @@ public class ReporteManager {
             System.out.println(pr.nombre() + " (" + pr.especialidad() + "): " + c);
         }
         System.out.println("--- Facturacion estimada (turnos atendidos) ---");
-        double total = 0, pac = 0, os = 0;
+        DetalleFacturacion facturacion = DetalleFacturacion.SIN_IMPORTES;
         for (Turno t : turnos.listarTodos()) {
             if (t.getEstado() == EstadoTurno.ATENDIDO) {
                 Profesional pr = profesionales.buscarPorMatricula(t.getMatriculaProfesional()).orElseThrow();
                 Paciente p = pacientes.buscarPorDni(t.getDniPaciente()).orElseThrow();
-                double precio = 0;
-                if (pr.especialidad().equals("CLINICA")) precio = 10000;
-                else if (pr.especialidad().equals("CARDIOLOGIA")) precio = 15000;
-                else if (pr.especialidad().equals("PEDIATRIA")) precio = 12000;
-                if (t.isUrgente()) precio = precio * 1.2;
-                double cos = 0;
-                switch (p.obraSocial()) {
-                    case "OSDE":
-                        cos = precio * 0.1;
-                        break;
-                    case "SWISS":
-                        cos = precio * 0.1;
-                        break;
-                    case "PAMI":
-                        cos = 0;
-                        break;
-                    default:
-                        cos = precio;
-                }
-                total += precio;
-                pac += cos;
-                os += precio - cos;
+                facturacion = facturacion.sumar(calculadora.calcular(t, p, pr));
             }
         }
-        System.out.println("Importe total: $" + String.format("%.2f", total));
-        System.out.println("A cargo de pacientes: $" + String.format("%.2f", pac));
-        System.out.println("A cargo de obras sociales: $" + String.format("%.2f", os));
+        System.out.println("Importe total: $" + String.format("%.2f", facturacion.importeTotal()));
+        System.out.println("A cargo de pacientes: $" + String.format("%.2f", facturacion.aCargoPaciente()));
+        System.out.println("A cargo de obras sociales: $" + String.format("%.2f", facturacion.aCargoObraSocial()));
     }
 }
