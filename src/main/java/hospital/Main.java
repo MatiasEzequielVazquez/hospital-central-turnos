@@ -1,7 +1,9 @@
 package hospital;
 
+import hospital.reportes.BuscadorTurnos;
 import hospital.reportes.CalculadoraArancel;
-import hospital.reportes.FiltroTurnos;
+import hospital.reportes.ReporteService;
+import hospital.reportes.ReportesConsola;
 import hospital.repositorio.DatosIniciales;
 import hospital.repositorio.PacienteRepositorioEnMemoria;
 import hospital.repositorio.ProfesionalRepositorioEnMemoria;
@@ -22,8 +24,9 @@ public class Main {
         TurnoManager tm = new TurnoManager(turnos, pacientes, profesionales);
 
         // modulo de busqueda y reportes
-        ReporteManager rm = new ReporteManager(turnos, pacientes, profesionales,
-                new CalculadoraArancel());
+        ReportesConsola reportesConsola = new ReportesConsola(sc,
+                new BuscadorTurnos(turnos, pacientes, profesionales),
+                new ReporteService(turnos, pacientes, profesionales, new CalculadoraArancel()));
 
         boolean salir = false;
         while (!salir) {
@@ -73,20 +76,10 @@ public class Main {
                     }
                     break;
                 case "4":
-                    System.out.print("Matricula (vacio = todas): ");
-                    String m = sc.nextLine().trim().toUpperCase();
-                    System.out.print("Estado PENDIENTE/ATENDIDO/CANCELADO (vacio = todos): ");
-                    String e = sc.nextLine().trim();
-                    System.out.print("Desde AAAA-MM-DD (vacio = sin limite): ");
-                    String d = sc.nextLine().trim();
-                    System.out.print("Hasta AAAA-MM-DD (vacio = sin limite): ");
-                    String h = sc.nextLine().trim();
-                    System.out.print("Solo urgentes (s/n): ");
-                    boolean su = sc.nextLine().trim().equalsIgnoreCase("s");
-                    rm.buscar(new FiltroTurnos(m, e, d, h, su));
+                    reportesConsola.buscar();
                     break;
                 case "5":
-                    rm.reporte();
+                    reportesConsola.mostrarReporte();
                     break;
                 case "0":
                     salir = true;
