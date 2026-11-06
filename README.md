@@ -73,8 +73,7 @@ docs/
 ├── code-review/           # checklist y registro de cada revisión
 ├── pruebas/               # plan de pruebas y evidencias antes/después
 ├── uml/                   # diagramas de clases antes y después (.drawio + .png)
-├── decisiones-tecnicas.md
-└── uso-de-ia.md
+└── decisiones-tecnicas.md
 ```
 
 ## Hitos (tags)
@@ -103,4 +102,4 @@ Cada cambio se hizo en una rama (`diagnostico/*`, `refactor/*`, `test/*`, `docs/
 
 ## Uso de IA
 
-Declarado en [`docs/uso-de-ia.md`](docs/uso-de-ia.md).
+La declaración de uso de herramientas de IA (herramienta, finalidad y grado de intervención) se encuentra en el informe del trabajo.
