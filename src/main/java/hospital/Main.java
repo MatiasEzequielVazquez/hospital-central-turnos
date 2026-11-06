@@ -8,6 +8,10 @@ import hospital.repositorio.DatosIniciales;
 import hospital.repositorio.PacienteRepositorioEnMemoria;
 import hospital.repositorio.ProfesionalRepositorioEnMemoria;
 import hospital.repositorio.TurnoRepositorioEnMemoria;
+import hospital.turnos.TurnoService;
+import hospital.turnos.TurnosConsola;
+import hospital.turnos.ValidadorTurno;
+import java.time.Clock;
 import java.util.Scanner;
 
 public class Main {
@@ -21,7 +25,9 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         // modulo de turnos
-        TurnoManager tm = new TurnoManager(turnos, pacientes, profesionales);
+        TurnosConsola turnosConsola = new TurnosConsola(sc,
+                new TurnoService(turnos, pacientes, profesionales,
+                        new ValidadorTurno(turnos, Clock.systemDefaultZone())));
 
         // modulo de busqueda y reportes
         ReportesConsola reportesConsola = new ReportesConsola(sc,
@@ -45,35 +51,13 @@ public class Main {
             String op = sc.nextLine().trim();
             switch (op) {
                 case "1":
-                    System.out.print("DNI paciente: ");
-                    String dni = sc.nextLine().trim();
-                    System.out.print("Matricula profesional: ");
-                    String mat = sc.nextLine().trim().toUpperCase();
-                    System.out.print("Fecha (AAAA-MM-DD): ");
-                    String fecha = sc.nextLine().trim();
-                    System.out.print("Hora (HH:MM): ");
-                    String hora = sc.nextLine().trim();
-                    System.out.print("Urgente (s/n): ");
-                    boolean urg = sc.nextLine().trim().equalsIgnoreCase("s");
-                    System.out.print("Motivo: ");
-                    String motivo = sc.nextLine().trim();
-                    tm.agregarTurno(dni, mat, fecha, hora, urg, motivo);
+                    turnosConsola.registrar();
                     break;
                 case "2":
-                    System.out.print("Id de turno: ");
-                    try {
-                        tm.cancelar(Integer.parseInt(sc.nextLine().trim()));
-                    } catch (NumberFormatException e) {
-                        System.out.println("ERROR: id invalido");
-                    }
+                    turnosConsola.cancelar();
                     break;
                 case "3":
-                    System.out.print("Id de turno: ");
-                    try {
-                        tm.atender(Integer.parseInt(sc.nextLine().trim()));
-                    } catch (NumberFormatException e) {
-                        System.out.println("ERROR: id invalido");
-                    }
+                    turnosConsola.atender();
                     break;
                 case "4":
                     reportesConsola.buscar();
