@@ -1,6 +1,7 @@
 package hospital.reportes;
 
 import hospital.dominio.Turno;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
 
@@ -68,9 +69,13 @@ public class ReportesConsola {
 
     private void imprimirFacturacion(DetalleFacturacion facturacion) {
         System.out.println("--- Facturacion estimada (turnos atendidos) ---");
-        System.out.println("Importe total: $" + String.format("%.2f", facturacion.importeTotal()));
-        System.out.println("A cargo de pacientes: $" + String.format("%.2f", facturacion.aCargoPaciente()));
-        System.out.println("A cargo de obras sociales: $" + String.format("%.2f", facturacion.aCargoObraSocial()));
+        System.out.println("Importe total: " + formatearMonto(facturacion.importeTotal()));
+        System.out.println("A cargo de pacientes: " + formatearMonto(facturacion.aCargoPaciente()));
+        System.out.println("A cargo de obras sociales: " + formatearMonto(facturacion.aCargoObraSocial()));
+    }
+
+    private static String formatearMonto(BigDecimal monto) {
+        return "$" + String.format("%.2f", monto);
     }
 
     private String preguntar(String etiqueta) {
